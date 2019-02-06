@@ -96,40 +96,19 @@ Usage instructions of the estadeo program:
    -o name  output video name to write the computed raw video
               default value 'output_video.raw'
               
-   -m N     motion estimation method
-              0-direct method; 1-feature based method
-              default value 1
-              
    -t N     transformation type to be computed:
-              2-traslation; 3-Euclidean transform;
-              4-similarity; 6-affinity; 8-homography
-              default value 8
+              2.translation; 3.Euclidean transform;
+              4.similarity; 6.affinity; 8.homography
+              default value 4
               
-   -s N     motion smoothing strategy:
-              0-pure composition;
-              1-compositional smoothing;
-              2-compositional local smoothing; 
-              3-local matrix-based smoothing;
-              4-local point-based smoothing
-              default value 3
-              
-   -r N     smoothing radius
-              default value 30
-              
-   -b N     type of boundary condition: 
-              0-constant; 1-neumann; 2-dirichlet
-              default value 2
-              
-   -p N     video postprocessing 
-              0-no postprocessing; 1-crop&zoom
-              default value 0
+   -st N      Gaussian standard deviation for temporal dimension
+              default value 30.000000
               
    -w name  write transformations to file
    
-   -l name  load transformations from file
+   -f name  write stabilizing transformations to file
    
    -v       switch on verbose mode 
-
    
 Usage examples:
 
