@@ -1,6 +1,6 @@
-# Estadeo Video Stabilization
+# Estadeo Online Video Stabilization
 
-## SUMMARY
+## Summary
 
 This program implements a video stabilization method using parametric models.
 Motion smoothing is one of the key steps for video stabilization. Its objective
@@ -28,36 +28,30 @@ Online, 2017.
 VIDEO STABILIZATION", SIAM J. Imaging Sciences, 2017.
 
 
-# AUTHOR
+## Author
 
 Javier Sánchez Pérez <jsanchez@ulpgc.es> 
 Centro de Tecnologías de la Imagen (CTIM) 
 Universidad de Las Palmas de Gran Canaria
 
 
-*******
-VERSION
-*******
+## Version
 
-Version 1, released on November 2, 2017
+Version 1, released on February 6, 2019
 
 
-*******
-LICENSE
-*******
+## License
 
 This program is free software: you can use, modify and/or redistribute it
 under the terms of the simplified BSD License. You should have received a
 copy of this license along this program. If not, see
 <http://www.opensource.org/licenses/bsd-license.html>.
 
-Copyright (C) 2017, Javier Sánchez Pérez <jsanchez@ulpgc.es>
+Copyright (C) 2019, Javier Sánchez Pérez <jsanchez@ulpgc.es>
 All rights reserved.
 
 
-***********
-COMPILATION
-***********
+## Compilation
 
 Required environment: Any unix-like system with a standard compilation
 environment (make and C and C++ compilers)
@@ -67,9 +61,7 @@ Compilation instructions: run "make" to produce two executables:
  - "generate_output" auxiliary program for the online demo
 
  
-*****
-USAGE
-*****
+## Usage
 
 The program reads an input video in raw format and produces an output raw
 video with the video stabilization. The input videos need to be converted
@@ -145,9 +137,8 @@ Usage examples:
    > bin/cmdline_execute.sh data/walk.mp4 data/outvideo.mp4 30 100 1 2 0.0000001 transforms.mat '-m 3 -b 1 -p 0 -online -t 4'
    
 
-*************
-LIST OF FILES
-*************
+## List of files
+
 main.cpp: Main function to be called from the command line. It reads and check 
   the parameters and call the estadeo program
 estadeo.cpp: Implements the estadeo video stabilization
