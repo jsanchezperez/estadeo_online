@@ -92,7 +92,7 @@ Usage instructions of the estadeo program:
   'nframes' is the number of frames in the video.
 
   OPTIONS:
-  --------
+  
    -o name  output video name to write the computed raw video
               default value 'output_video.raw'
    -m N     motion estimation method
