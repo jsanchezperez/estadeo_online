@@ -1,5 +1,5 @@
 CFLAGS=-Wall -Wextra -O3 #-Werror   
-LFLAGS=-lstdc++ -lm -lfftw3 -lfftw3f -fopenmp
+LFLAGS=-lstdc++ -lm -lfftw3 -lfftw3f #-fopenmp
 INCLUDE=-I./src/ica -I./src
 
 #object files

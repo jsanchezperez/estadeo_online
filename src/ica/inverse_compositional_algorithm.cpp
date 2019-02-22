@@ -294,7 +294,6 @@ void select_points(
     for(int i=border+radius;i<ny-border-radius;i+=radius*radius)
     for(int j=border+radius;j<nx-border-radius;j+=radius*radius)
     {
-      //    x.push_back(i*nx+j);
       for(int k=i-region;k<=i+region; k++)
         for(int l=j-region;l<=j+region; l++)
           x.push_back(k*nx+l);
@@ -510,21 +509,21 @@ void pyramidal_inverse_compositional_algorithm(
     int   nparams, //number of parameters
     int   nxx,     //image width
     int   nyy,     //image height
-    int   nscales, //number of scales
+    int   cscale,  //coarsest scale
+    int   fscale,  //finest scale 
     float TOL,     //stopping criterion threshold
     int   robust,  //robust error function
-    float lambda,  //parameter of robust error function
-    int   max_d    //maximum size of finest scale
+    float lambda   //parameter of robust error function
 )
 {
     int size=nxx*nyy;
 
-    float **I1s=new float*[nscales];
-    float **I2s=new float*[nscales];
-    float **ps =new float*[nscales];
+    float **I1s=new float*[cscale];
+    float **I2s=new float*[cscale];
+    float **ps =new float*[cscale];
 
-    int *nx=new int[nscales];
-    int *ny=new int[nscales];
+    int *nx=new int[cscale];
+    int *ny=new int[cscale];
 
     I1s[0]=new float[size];
     I2s[0]=new float[size];
@@ -546,7 +545,7 @@ void pyramidal_inverse_compositional_algorithm(
       p[i]=0.0;
 
     //create the scales
-    for(int s=1; s<nscales; s++)
+    for(int s=1; s<cscale; s++)
     {
       zoom_size(nx[s-1], ny[s-1], nx[s], ny[s]);
 
@@ -565,10 +564,10 @@ void pyramidal_inverse_compositional_algorithm(
     }  
 
     //pyramidal approach for computing the transformation
-    for(int s=nscales-1; s>=0; s--)
+    for(int s=cscale-1; s>=0; s--)
     {
-      //compute transformation if smaller than maximum allowed size
-      if(nx[s]<max_d || ny[s]<max_d)
+      //compute transformation for maximum numer of scales
+      if(s>=fscale-1)
       {
         //incremental refinement for this scale
         if(robust==QUADRATIC)
@@ -592,7 +591,7 @@ void pyramidal_inverse_compositional_algorithm(
     //delete allocated memory
     delete []I1s[0];
     delete []I2s[0];
-    for(int i=1; i<nscales; i++)
+    for(int i=1; i<cscale; i++)
     {
       delete []I1s[i];
       delete []I2s[i];

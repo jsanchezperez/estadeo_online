@@ -22,10 +22,10 @@ class estadeo {
     ~estadeo();
     
     void process_frame(
-      float *I1,    //input previous image of video
-      float *I2,    //input last image of video
+      float *I1,    //input previous grayscale image 
+      float *I2,    //input last grayscale image
       float *Ic,    //input last color image to warp
-      Timer &timer, //keep runtimes
+      Timer &timer, //manage runtimes
       int   nx,     //number of columns 
       int   ny,     //number of rows
       int   nz      //number of channels
@@ -37,7 +37,7 @@ class estadeo {
     
     int obtain_radius(){return (int)3*sigma;}
 
-    
+  
   private:
   
     void compute_motion(
@@ -68,7 +68,7 @@ class estadeo {
     int   radius;  //radius of the Gaussian convolution
     float *Hs;     //last smoothing transform
     float *Hp;     //last stabilizing transform
-    int   verbose; //swith on verbose mode
+    int   verbose; //verbose mode
     
     //variables for the circular array
     int   N;    //circular array size

@@ -86,11 +86,11 @@ void pyramidal_inverse_compositional_algorithm(
     int   nparams, //number of parameters
     int   nxx,     //image width
     int   nyy,     //image height
-    int   nscales, //number of scales
+    int   cscale,  //coarsest scale
+    int   fscale,  //finest scale 
     float TOL,     //stopping criterion threshold
     int   robust,  //robust error function
-    float lambda,  //parameter of robust error function
-    int   max_d=5000 //maximum size of finest scale
+    float lambda   //parameter of robust error function
 );
 
 #endif

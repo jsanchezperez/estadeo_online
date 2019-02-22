@@ -3,7 +3,7 @@
 // copy of this license along this program. If not, see
 // <http://www.opensource.org/licenses/bsd-license.html>.
 //
-// Copyright (C) 2018, Javier Sánchez Pérez <jsanchez@ulpgc.es>
+// Copyright (C) 2019, Javier Sánchez Pérez <jsanchez@ulpgc.es>
 // All rights reserved.
 
 
@@ -242,7 +242,7 @@ int main (int argc, char *argv[])
       //convert it to grayscale
       rgb2gray(Ic, I2, width, height, nchannels);
       
-      //call the method for stabilizing current frame
+      //call the method for stabilizing the current frame
       stabilize.process_frame(I1, I2, Ic, timer, width, height, nchannels);
 
       if(verbose) timer.print_time(f);

@@ -3,7 +3,7 @@
 // copy of this license along this program. If not, see
 // <http://www.opensource.org/licenses/bsd-license.html>.
 //
-// Copyright (C) 2017-2018, Javier Sánchez Pérez <jsanchez@ulpgc.es>
+// Copyright (C) 2019, Javier Sánchez Pérez <jsanchez@ulpgc.es>
 // All rights reserved.
 
 
@@ -77,11 +77,11 @@ void estadeo::process_frame(
   if(verbose) timer.set_t1();
   compute_motion(I1, I2, nx, ny);
     
-  //step 2. Smooth until the last transformation 
+  //step 2. Motion smoothing until the last transformation 
   if(verbose) timer.set_t2();
   motion_smoothing();
     
-  //step 3. Warp the image
+  //step 3. Warp the incoming fame
   if(verbose) timer.set_t3();
   frame_warping(Ic, nx, ny, nz);
   if(verbose) timer.set_t4();
@@ -102,20 +102,15 @@ void estadeo::compute_motion
 )
 {
   //parameters for the direct method
-  int   nscales=100;
   float TOL=1E-3;
   float lambda=0;
-  float N;
-  int   robust=LORENTZIAN; //QUADRATIC; //
-  int   max_d=200;
-  int   min_d=50;
-
-  N=1+log(((nx<ny)?nx:ny)/min_d)/log(2.);
-  if ((int) N<nscales) nscales=(int) N;
-
+  int   robust=LORENTZIAN;
+  int   cscale=(int)(log(((nx<ny)?nx:ny)/50)/log(2.)+1.5);
+  int   fscale=cscale-1;
+  
   //motion estimation through direct methods
   pyramidal_inverse_compositional_algorithm(
-    I1, I2, get_H(), Np, nx, ny, nscales, TOL, robust, lambda, max_d
+    I1, I2, get_H(), Np, nx, ny, cscale, fscale, TOL, robust, lambda
   );
 }
 
@@ -127,11 +122,11 @@ void estadeo::compute_motion
   * 
   *
 **/
-//
+
 //SE PUEDEN CALCULAR DE FORMA INCREMENTAL Hc (con una sola H_1)
 void estadeo::motion_smoothing()
 {
-  //obtain current radius
+  //adapt current radius
   int rad=radius; 
   if(rad>=Nf) rad=Nf-1;
 
